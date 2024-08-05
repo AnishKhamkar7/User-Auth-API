@@ -7,9 +7,13 @@ dotenv.config(
         path:'./.env'
     }
 )
+export const app = express()
+
 
 connectDB()
 
 
-export const app = express()
+app.use('/api/users',)
+
+
 
