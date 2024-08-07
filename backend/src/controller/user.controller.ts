@@ -1,11 +1,17 @@
 import { Request, Response } from "express";
 import UserServices from "../service/user.service";
-import userRepository from "../repository/user.repoitory";
 
 export default class UserController {
-  static registerUser = async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+  userService: UserServices;
 
-    const userServices = new UserServices(new userRepository());
+  constructor(userService: UserServices) {
+    this.userService = userService;
+  }
+  registerUser = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+
+    const user = await this.userService.createUser({ email, password });
+
+    return res.status(200).json(user);
   };
 }
