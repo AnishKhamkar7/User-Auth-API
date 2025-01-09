@@ -37,4 +37,19 @@ export default class userRepository {
 
     return createdUser;
   }
+
+  async updateUser({ email, password }: { email: string; password: string }) {
+    const updatedUser = await prisma.user.create({
+      data: {
+        email,
+        password,
+      },
+    });
+
+    if (!updatedUser) {
+      throw new ApiError.InternalServerError("User Cannot be updated");
+    }
+
+    return updatedUser;
+  }
 }
