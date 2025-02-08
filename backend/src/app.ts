@@ -10,4 +10,4 @@ export const app = express();
 
 connectDB();
 
-app.use("/api/users");
+app.use("/api/users", UserRouter);
