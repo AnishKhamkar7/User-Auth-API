@@ -1,19 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/user.db";
+import UserRouter from "./routes/user.routes";
 
-dotenv.config(
-    {
-        path:'./.env'
-    }
-)
-export const app = express()
+dotenv.config({
+  path: "./.env",
+});
+export const app = express();
 
+connectDB();
 
-connectDB()
-
-
-app.use('/api/users',)
-
-
-
+app.use("/api/users");
