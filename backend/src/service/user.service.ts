@@ -20,18 +20,12 @@ export default class UserServices {
   async createUser({ email, password }: { email: string; password: string }) {
     await this.checkExistingUser(email);
 
-    const isEmailValid = validateUser.emailValidation(email);
-    const isPasswordValid = validateUser.passwordValidation(password);
+    validateUser.emailValidation(email);
+    validateUser.passwordValidation(password);
 
-    if (!isEmailValid) {
-      throw new ApiError.BadRequestError("Invalid Email ID");
-    }
+    const encryptedPassword = await validateUser.passwordEncrypt(password);
 
-    if (!isPasswordValid) {
-      throw new ApiError.BadRequestError("Invalid Password");
-    }
-
-    const user = await this.UserRepository.createUser({ email, password });
+    const user = await this.UserRepository.createUser({ email, password: encryptedPassword });
 
     return user;
   }
