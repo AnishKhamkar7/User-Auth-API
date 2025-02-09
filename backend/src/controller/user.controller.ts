@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserServices from "../service/user.service";
+import apiResponse from "../utils/apiResponse";
 
 export default class UserController {
   userService: UserServices;
@@ -12,6 +13,6 @@ export default class UserController {
 
     const user = await this.userService.createUser({ email, password });
 
-    return res.status(200).json(user);
+    return apiResponse(res, 200, user);
   };
 }

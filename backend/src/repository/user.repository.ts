@@ -22,6 +22,8 @@ export default class userRepository {
     if (!user) {
       throw new ApiError.NotFoundError("User Not Found");
     }
+
+    return user;
   }
 
   async createUser({ email, password }: { email: string; password: string }) {

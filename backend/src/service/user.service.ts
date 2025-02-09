@@ -11,6 +11,10 @@ export default class UserServices {
 
   async checkExistingUser(email: string) {
     const existingUser = await this.UserRepository.findByEmail(email);
+
+    if (existingUser) {
+      return new ApiError.BadRequestError("Email Already exists");
+    }
   }
 
   async createUser({ email, password }: { email: string; password: string }) {
